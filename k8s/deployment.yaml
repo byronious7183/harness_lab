@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: harness-lab-app
+  labels:
+    app: harness-lab-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: harness-lab-app
+  template:
+    metadata:
+      labels:
+        app: harness-lab-app
+    spec:
+      containers:
+        - name: harness-lab-app
+          # Image path is hard coded for the lab. Replace the username.
+          image: YOUR_DOCKERHUB_USERNAME/harness-lab-app:latest
+          ports:
+            - containerPort: 5000
+          env:
+            - name: APP_VERSION
+              value: "1.0.0"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 250m
+              memory: 128Mi

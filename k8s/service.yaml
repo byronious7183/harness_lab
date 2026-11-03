@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: harness-lab-app-svc
+spec:
+  type: LoadBalancer
+  selector:
+    app: harness-lab-app
+  ports:
+    - port: 80
+      targetPort: 5000
