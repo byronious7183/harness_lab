@@ -17,7 +17,7 @@ spec:
       containers:
         - name: harness-lab-app
           # Image path is hard coded for the lab. Replace the username.
-          image: byronious7183/harness-lab-app:latest
+          image: <+artifact.image>
           ports:
             - containerPort: 5000
           env:
