@@ -16,13 +16,12 @@ spec:
     spec:
       containers:
         - name: harness-lab-app
-          # Image path is hard coded for the lab. Replace the username.
           image: {{.Values.image}}
           ports:
             - containerPort: 5000
           env:
             - name: APP_VERSION
-              value: "1.0.0"
+              value: "1.0.1"
           readinessProbe:
             httpGet:
               path: /health
